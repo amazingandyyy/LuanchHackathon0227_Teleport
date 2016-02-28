@@ -189,7 +189,7 @@
 
         map = new Map("mapDiv", {
           basemap: "streets",
-          center: [-95.249, 38.954],
+          center: [-122.43, 37.80],
           zoom: 14,
           slider: false,
           smartNavigation: false
@@ -245,8 +245,8 @@
         map.on("mouse-drag", function(evt){
 
           setTimeout(function() { 
-            var price = (Math.random() * 3) + 7
-            document.getElementById("saves").innerHTML = "Save your customers $" + price.toFixed(2).toString(); 
+            var price = Math.floor((Math.random() * 3) + 7)
+            document.getElementById("saves").innerHTML = "Save your customers $" + price.toString() + "-" + (price + 2).toString(); 
           }, 750);
 
           
