@@ -245,7 +245,7 @@
         map.on("mouse-drag", function(evt){
 
           setTimeout(function() { 
-            var price = (Math.random() * 3) + 7
+            var price = (Math.random() * 8) + 12
             document.getElementById("saves").innerHTML = "Save your customers $" + price.toFixed(2).toString(); 
           }, 750);
 
@@ -351,8 +351,7 @@
     
 
     <div class="container" style="padding-top: 100px;">
-        <img src="css/images/logo.png" style='width: 200px' class='logo_top'>
-        <div class="row">
+  <a href="/index.html"><img src="css/images/logo.png" style='width: 200px' class='logo_top'></a>        <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
                 <form class="map_form">
@@ -361,13 +360,14 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="formGroupExampleInput">Your address</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="sample@email.com">
+                            <input type="text" class="form-control" id="formGroupExampleInput" value="
+256 Grant Ave, San Francisco, CA 94108">
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Zip Code</label>
-                            <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="password">
+                            <input type="text" class="form-control" id="formGroupExampleInput2" value="94108">
                         </div>
 
                     </div>
