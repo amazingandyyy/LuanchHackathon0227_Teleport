@@ -1,0 +1,302 @@
+<html>
+<!--testing-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="css/images/logo.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <!-- Google Font -> Lato -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900" rel="stylesheet" type="text/css">
+    <title>Teleport</title>
+    <!-- CDN -> Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+<!--     Link external style.css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CDN -> Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.css">
+    <!-- CDN -> Swiper.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.2.7/css/swiper.min.css">
+
+   
+    <style>
+        .pipe_logo {
+            width: 60px;
+            margin-bottom: 40px;
+        }
+        .coupon_list {
+            padding: 6px 3px;
+        }
+        .coupon_item {
+            background: #F2F2F2;
+            margin: 10px 0px;
+            padding: 30px 80px 10px 100px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+        .coupon_item:hover {
+            box-shadow: 0px 1px 7px -3px #000;
+        }
+        .coupon_item .title {
+            line-height: 10px;
+            display: inline-block;
+        }
+        .coupon_item .details {
+            font-size: 1em;
+            font-weight: 500;
+        }
+        .attention_getter {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            background: #FFD521;
+            width: 80px;
+            height: 100%;
+            padding: 40px 0px;
+            font-size: 2em;
+            line-height: 20px;
+            text-align: center;
+        }
+        .attention_getter_borders {
+            background: #FFD521;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            transform: rotate(45deg);
+            left: 74px;
+        }
+        .attention_getter_borders1 {
+            top: 0px;
+        }
+        .attention_getter_borders2 {
+            top: 17px;
+        }
+        .attention_getter_borders3 {
+            top: 34px;
+        }
+        .attention_getter_borders4 {
+            top: 51px;
+        }
+        .attention_getter_borders5 {
+            top: 68px;
+        }
+        .attention_getter_borders6 {
+            top: 85px;
+        }
+        .attention_getter_borders7 {
+            top: 102px;
+        }
+        .attention_getter_borders8 {
+            top: 119px;
+        }
+        .attention_getter_borders9 {
+            top: 136px;
+        }
+        .attention_getter_borders10 {
+            top: 153px;
+        }
+        .choose_button_uber {
+            position: absolute;
+            right: -70px;
+            top: 0px;
+            background: #010101;
+            width: 80px;
+            height: 50.5%;
+            transition: .25s all ease-in-out;
+            border-radius: 0px 4px 0px 0px;
+            color: white;
+        }
+        .choose_button_lyft {
+            position: absolute;
+            right: -70px;
+            bottom: 0px;
+            background: #F42C8E;
+            width: 80px;
+            height: 50.5%;
+            transition: .25s all ease-in-out;
+            border-radius: 0px 0px 4px 0px;
+            color: white;
+        }
+        .coupon_item:hover .choose_button_lyft,
+        .coupon_item:hover .choose_button_uber {
+            right: -1px;
+        }
+        footer {
+            margin-top: 100px;
+            height: 200px;
+            padding: 50px;
+        }
+        .logo_w {
+            margin: auto;
+            width: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Firebase JS -->
+    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+
+    <div class="container" style="padding-top: 100px;">
+        <img src="css/images/pipe.png" alt="" class="pipe_logo">
+        <div class="row">
+            <div class="col-md-2 col-sm-1"></div>
+            <div class="col-md-8 col-sm-10">
+                <div class="coupon_list">
+                    <div class="coupon_item">
+                        <h1 class="title">JCPenney</h1>
+                        <div class="attention_getter">50% off</div>
+                        <div class="attention_getter_border_container">
+
+                        </div>
+                        <h2 class="address"></h2>
+                        <h2 class="distance"></h2>
+                        <p class="details">You can use this coupon to get 50% off of any items available in the certain JCPenney shooping mall.</p>
+                        <button class="choose_button_uber">
+                            <img src="css/images/uber1.png" alt="" style="width: 50px;">
+                        </button>
+                        <button class="choose_button_lyft">
+                            <img src="css/images/lyft2.png" alt="" style="width: 30px;">
+                        </button>
+                    </div>
+                    <div class="coupon_item">
+                        <h1 class="title">JCPenney</h1>
+                        <div class="attention_getter">50% off</div>
+                        <div class="attention_getter_border_container">
+
+                        </div>
+                        <h2 class="address"></h2>
+                        <h2 class="distance"></h2>
+                        <p class="details">You can use this coupon to get 50% off of any items available in the certain JCPenney shooping mall.</p>
+                        <button class="choose_button_uber">
+                            <img src="css/images/uber1.png" alt="" style="width: 50px;">
+                        </button>
+                        <button class="choose_button_lyft">
+                            <img src="css/images/lyft2.png" alt="" style="width: 30px;">
+                        </button>
+                    </div>
+                    <div class="coupon_item">
+                        <h1 class="title">JCPenney</h1>
+                        <div class="attention_getter">50% off</div>
+                        <div class="attention_getter_border_container">
+
+                        </div>
+                        <h2 class="address"></h2>
+                        <h2 class="distance"></h2>
+                        <p class="details">You can use this coupon to get 50% off of any items available in the certain JCPenney shooping mall.</p>
+                        <button class="choose_button_uber">
+                            <img src="css/images/uber1.png" alt="" style="width: 50px;">
+                        </button>
+                        <button class="choose_button_lyft">
+                            <img src="css/images/lyft2.png" alt="" style="width: 30px;">
+                        </button>
+                    </div>
+                    <div class="coupon_item">
+                        <h1 class="title">JCPenney</h1>
+                        <div class="attention_getter">50% off</div>
+                        <div class="attention_getter_border_container">
+
+                        </div>
+                        <h2 class="address"></h2>
+                        <h2 class="distance"></h2>
+                        <p class="details">You can use this coupon to get 50% off of any items available in the certain JCPenney shooping mall.</p>
+                        <button class="choose_button_uber">
+                            <img src="css/images/uber1.png" alt="" style="width: 50px;">
+                        </button>
+                        <button class="choose_button_lyft">
+                            <img src="css/images/lyft2.png" alt="" style="width: 30px;">
+                        </button>
+                    </div>
+                    <div class="coupon_item">
+                        <h1 class="title">JCPenney</h1>
+                        <div class="attention_getter">50% off</div>
+                        <div class="attention_getter_border_container">
+
+                        </div>
+                        <h2 class="address"></h2>
+                        <h2 class="distance"></h2>
+                        <p class="details">You can use this coupon to get 50% off of any items available in the certain JCPenney shooping mall.</p>
+                        <button class="choose_button_uber">
+                            <img src="css/images/uber1.png" alt="" style="width: 50px;">
+                        </button>
+                        <button class="choose_button_lyft">
+                            <img src="css/images/lyft2.png" alt="" style="width: 30px;">
+                        </button>
+                    </div>
+                    <div class="coupon_item">
+                        <h1 class="title">JCPenney</h1>
+                        <div class="attention_getter">50% off</div>
+                        <div class="attention_getter_border_container">
+
+                        </div>
+                        <h2 class="address"></h2>
+                        <h2 class="distance"></h2>
+                        <p class="details">You can use this coupon to get 50% off of any items available in the certain JCPenney shooping mall.</p>
+                        <button class="choose_button_uber">
+                            <img src="css/images/uber1.png" alt="" style="width: 50px;">
+                        </button>
+                        <button class="choose_button_lyft">
+                            <img src="css/images/lyft2.png" alt="" style="width: 30px;">
+                        </button>
+                    </div>
+                    <div class="coupon_item">
+                        <h1 class="title">JCPenney</h1>
+                        <div class="attention_getter">50% off</div>
+                        <div class="attention_getter_border_container">
+
+                        </div>
+                        <h2 class="address"></h2>
+                        <h2 class="distance"></h2>
+                        <p class="details">You can use this coupon to get 50% off of any items available in the certain JCPenney shooping mall.</p>
+                        <button class="choose_button_uber">
+                            <img src="css/images/uber1.png" alt="" style="width: 50px;">
+                        </button>
+                        <button class="choose_button_lyft">
+                            <img src="css/images/lyft2.png" alt="" style="width: 30px;">
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-2 col-sm-1"></div>
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+
+    <!-- link to local app.js -->
+    <script src="js/app.js"></script>
+
+    <script>
+        var attention_getter_border_items = "";
+        for (var i = 1; i < 11; i++) {
+            attention_getter_border_items = "<div class='attention_getter_borders attention_getter_borders" + i + "'></div>";
+            $('.attention_getter_border_container').append(attention_getter_border_items);
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('footer').load('../footer.html');
+        })
+    </script>
+
+
+</body>
+
+</html>
