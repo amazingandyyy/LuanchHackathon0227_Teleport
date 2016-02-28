@@ -245,7 +245,7 @@
         map.on("mouse-drag", function(evt){
 
           setTimeout(function() { 
-            var price = Math.floor((Math.random() * 3) + 7)
+            var price = Math.floor((Math.random() * 3) + 12)
             document.getElementById("saves").innerHTML = "Save your customers $" + price.toString() + "-" + (price + 2).toString(); 
 
           }, 750);
@@ -379,7 +379,7 @@
                         <h1>Estimated Coupon:</h1>
                         <h2><div id="saves"></div></h2>
                         <br>
-                        <button class="btn btn-default">Create the coupon</button>
+                        <button class="btn btn-default"><a href="/done.html">Create the coupon</a></button>
                     </div>
                 </form>
             </div>

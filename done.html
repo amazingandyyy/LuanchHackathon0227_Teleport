@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.15/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.15/esri/css/esri.css">
+    <!-- Google Font -> Lato -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900" rel="stylesheet" type="text/css">
+    <title>Teleport</title>
+    <!-- CDN -> Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <!--     Link external style.css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CDN -> Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.css">
+    <!-- CDN -> Swiper.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.2.7/css/swiper.min.css">
+
+    <style>
+        .pipe_logo {
+            width: 60px;
+            margin-bottom: 40px;
+        }
+        .coupon_list {
+            padding: 6px 3px;
+        }
+        .coupon_item {
+            background: #F2F2F2;
+            margin: 10px 0px;
+            padding: 30px 80px 10px 100px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+        .coupon_item:hover {
+            box-shadow: 0px 1px 7px -3px #000;
+        }
+        .coupon_item .title {
+            line-height: 10px;
+            display: inline-block;
+        }
+        .coupon_item .details {
+            font-size: 1em;
+            font-weight: 500;
+        }
+        .attention_getter {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            background: #FFD521;
+            width: 80px;
+            height: 100%;
+            padding: 40px 0px;
+            font-size: 2em;
+            line-height: 20px;
+            text-align: center;
+        }
+        .attention_getter_borders {
+            background: #FFD521;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            transform: rotate(45deg);
+            left: 74px;
+        }
+        .attention_getter_borders1 {
+            top: 0px;
+        }
+        .attention_getter_borders2 {
+            top: 17px;
+        }
+        .attention_getter_borders3 {
+            top: 34px;
+        }
+        .attention_getter_borders4 {
+            top: 51px;
+        }
+        .attention_getter_borders5 {
+            top: 68px;
+        }
+        .attention_getter_borders6 {
+            top: 85px;
+        }
+        .attention_getter_borders7 {
+            top: 102px;
+        }
+        .attention_getter_borders8 {
+            top: 119px;
+        }
+        .attention_getter_borders9 {
+            top: 136px;
+        }
+        .attention_getter_borders10 {
+            top: 153px;
+        }
+        .choose_button_uber {
+            position: absolute;
+            right: -70px;
+            top: 0px;
+            background: #010101;
+            width: 80px;
+            height: 50.5%;
+            transition: .25s all ease-in-out;
+            border-radius: 0px 4px 0px 0px;
+            color: white;
+        }
+        .choose_button_lyft {
+            position: absolute;
+            right: -70px;
+            bottom: 0px;
+            background: #F42C8E;
+            width: 80px;
+            height: 50.5%;
+            transition: .25s all ease-in-out;
+            border-radius: 0px 0px 4px 0px;
+            color: white;
+        }
+        .coupon_item:hover .choose_button_lyft,
+        .coupon_item:hover .choose_button_uber {
+            right: -1px;
+        }
+        footer {
+            margin-top: 100px;
+            height: 200px;
+            padding: 50px;
+        }
+        .logo_w {
+            margin: auto;
+            width: 100px;
+        }
+        .login_container {
+            position: relative;
+            padding: 20px 20px;
+        }
+        .login_card:hover {} .logo_top {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+        }
+        .map_container {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #000;
+        }
+        #messages {
+            background-color: #fff;
+            box-shadow: 0 0 5px #888;
+            font-size: 1.1em;
+            max-width: 15em;
+            padding: 0.5em;
+            position: absolute;
+            right: 300px;
+            top: 300px;
+            z-index: 40;
+        }
+        #mapDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+    </style>
+
+    <script src="https://js.arcgis.com/3.15/"></script>
+    <script>
+        var map;
+        require([
+            "esri/map", "esri/layers/FeatureLayer",
+            "esri/tasks/query", "esri/geometry/Circle",
+            "esri/graphic", "esri/InfoTemplate", "esri/symbols/SimpleMarkerSymbol",
+            "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/renderers/SimpleRenderer",
+            "esri/config", "esri/Color", "dojo/dom", "dojo/domReady!"
+        ], function(
+            Map, FeatureLayer,
+            Query, Circle,
+            Graphic, InfoTemplate, SimpleMarkerSymbol,
+            SimpleLineSymbol, SimpleFillSymbol, SimpleRenderer,
+            esriConfig, Color, dom
+        ) {
+            // use a proxy page if a URL generated by this page is greater than 2000 characters
+            //
+            // this should not be needed as nearly all query & select functions are performed on the client
+            esriConfig.defaults.io.proxyUrl = "/proxy/";
+
+            map = new Map("mapDiv", {
+                basemap: "streets",
+                center: [-95.249, 38.954],
+                zoom: 14,
+                slider: false,
+                smartNavigation: false
+            });
+
+            map.on("load", function() {
+                map.disablePan();
+            });
+
+            //add the census block points in on demand mode. Note that an info template has been defined so when
+            //selected features are clicked a popup window will appear displaying the content defined in the info template.
+            var featureLayer = new FeatureLayer("http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/0", {
+                infoTemplate: new InfoTemplate("Block: ${BLOCK}", "${*}"),
+                outFields: ["POP2000", "HOUSEHOLDS", "HSE_UNITS", "TRACT", "BLOCK"]
+            });
+
+            // selection symbol used to draw the selected census block points within the buffer polygon
+            var symbol = new SimpleMarkerSymbol(
+                SimpleMarkerSymbol.STYLE_CIRCLE,
+                12,
+                new SimpleLineSymbol(
+                    SimpleLineSymbol.STYLE_NULL,
+                    new Color([247, 34, 101, 0.9]),
+                    1
+                ),
+                new Color([207, 34, 171, 0.5])
+            );
+            featureLayer.setSelectionSymbol(symbol);
+
+            //make unselected features invisible
+            var nullSymbol = new SimpleMarkerSymbol().setSize(0);
+            featureLayer.setRenderer(new SimpleRenderer(nullSymbol));
+
+            map.addLayer(featureLayer);
+
+
+
+            var circleSymb = new SimpleFillSymbol(
+                SimpleFillSymbol.STYLE_NULL,
+                new SimpleLineSymbol(
+                    SimpleLineSymbol.STYLE_SHORTDASHDOTDOT,
+                    new Color([105, 105, 105]),
+                    2
+                ), new Color([255, 255, 0, 0.25])
+            );
+            var circle;
+
+            i = 0.5
+            currentX = 0;
+            currentY = 0;
+
+            //when the map is clicked create a buffer around the click point of the specified distance.
+            map.on("mouse-drag", function(evt) {
+
+                setTimeout(function() {
+                    var price = (Math.random() * 8) + 12
+                    document.getElementById("saves").innerHTML = "Save your customers $" + price.toFixed(2).toString();
+                }, 750);
+
+
+
+                if (currentX < evt.clientX) {
+                    i = i - 0.1;
+
+                    if (i < 0.1) {
+                        i = 0.1;
+                    }
+                } else {
+                    i = i + 0.025;
+                }
+
+                if (currentY < evt.clientY) {
+                    i = i - 0.1;
+
+                    if (i < 0.1) {
+                        i = 0.1;
+                    }
+                } else {
+                    i = i + 0.025;
+                }
+
+                currentX = evt.clientX
+                currentY = evt.clientY
+                circle = new Circle({
+                    center: evt.mapPoint,
+                    geodesic: true,
+                    radius: i,
+                    radiusUnit: "esriMiles"
+                });
+                map.graphics.clear();
+                map.infoWindow.hide();
+                var graphic = new Graphic(circle, circleSymb);
+                map.graphics.add(graphic);
+
+                var query = new Query();
+                query.geometry = circle.getExtent();
+                //use a fast bounding box query. will only go to the server if bounding box is outside of the visible map
+                featureLayer.queryFeatures(query, selectInBuffer);
+
+
+            });
+
+            map.on("click", function(evt) {
+
+                circle = new Circle({
+                    center: evt.mapPoint,
+                    geodesic: true,
+                    radius: 0.5,
+                    radiusUnit: "esriMiles"
+                });
+                map.graphics.clear();
+                map.infoWindow.hide();
+                var graphic = new Graphic(circle, circleSymb);
+                map.graphics.add(graphic);
+                map.disablePan();
+
+                var query = new Query();
+                query.geometry = circle.getExtent();
+                //use a fast bounding box query. will only go to the server if bounding box is outside of the visible map
+                featureLayer.queryFeatures(query, selectInBuffer);
+
+            });
+
+            function selectInBuffer(response) {
+                var feature;
+                var features = response.features;
+                var inBuffer = [];
+                //filter out features that are not actually in buffer, since we got all points in the buffer's bounding box
+                for (var i = 0; i < features.length; i++) {
+                    feature = features[i];
+                    if (circle.contains(feature.geometry)) {
+                        inBuffer.push(feature.attributes[featureLayer.objectIdField]);
+                    }
+                }
+                var query = new Query();
+                query.objectIds = inBuffer;
+                //use a fast objectIds selection query (should not need to go to the server)
+                featureLayer.selectFeatures(query, FeatureLayer.SELECTION_NEW, function(results) {
+                    var totalPopulation = sumPopulation(results);
+                    var r = "";
+                    r = "<b>The total Census Block population within the buffer is <i>" + totalPopulation + "</i>.</b>";
+                    dom.byId("messages").innerHTML = r;
+                });
+            }
+
+            function sumPopulation(features) {
+                var popTotal = 0;
+                for (var x = 0; x < features.length; x++) {
+                    popTotal = popTotal + features[x].attributes["POP2000"];
+                }
+                return popTotal;
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <div class="container" style="padding-top: 100px;">
+        <a href="/index.html">
+            <img src="css/images/logo.png" style='width: 200px; margin-bottom: 200px;' class=''>
+        </a>
+<!--        <div class="row">-->
+            <!--
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <form class="map_form">
+                   <div class="col-sm-2"></div>
+                   
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Your address</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput" value="
+256 Grant Ave, San Francisco, CA 94108">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Zip Code</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput2" value="94108">
+                        </div>
+
+                    </div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-12">
+                        <div id="mapDiv" class="map_container"></div>
+                        <br>
+-->
+            <h1>Congras! Coupon submitted!</h1>
+            <!--
+                        <h2><div id="saves"></div></h2>
+                        <br>
+                        <button class="btn btn-default">Create the coupon</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-1"></div>
+
+
+        </div>
+-->
+        </div>
+
+
+
+
+
+</body>
+
+</html>
